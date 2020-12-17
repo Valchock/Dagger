@@ -8,6 +8,8 @@ import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
 import com.project.dagger.R;
 
+import javax.inject.Singleton;
+
 import androidx.core.content.ContextCompat;
 import dagger.Module;
 import dagger.Provides;
@@ -15,11 +17,13 @@ import dagger.Provides;
 @Module
 public class AppModule {
 
+    @Singleton
     @Provides
     static Drawable provideAppDrawable(Application application) {
         return ContextCompat.getDrawable(application, R.drawable.ic_launcher);
     }
 
+    @Singleton
     @Provides
     static RequestOptions provideRequestOptions(){
         return RequestOptions
@@ -27,6 +31,7 @@ public class AppModule {
                 .error(R.drawable.ic_launcher_background);
     }
 
+    @Singleton
     @Provides
     //RequestOption from previous provider
     static RequestManager provideGlideInstance(Application application, RequestOptions requestOptions){

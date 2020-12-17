@@ -1,4 +1,4 @@
-package com.project.dagger;
+package com.project.dagger.ui;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -7,9 +7,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.bumptech.glide.RequestManager;
+import com.project.dagger.R;
+import com.project.dagger.viewmodel.ViewModelProviderFactory;
 
 import javax.inject.Inject;
 
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProviders;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerAppCompatActivity;
@@ -24,6 +28,10 @@ public class AuthActivity extends DaggerAppCompatActivity {
     EditText userId;
     @BindView(R.id.login_btn)
     Button loginBtn;
+    private AuthViewModel authViewModel;
+
+    @Inject
+    ViewModelProviderFactory providerFactory;
 
     @Inject
     Drawable logo;
@@ -36,6 +44,7 @@ public class AuthActivity extends DaggerAppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
         ButterKnife.bind(this);
+        authViewModel = ViewModelProviders.of(this, providerFactory).get(AuthViewModel.class);
         setLogo();
     }
 
